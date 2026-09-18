@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Lora', ui-serif, Georgia, 'Times New Roman', serif;
+
+  /* Calm, paper-like neutrals with a single muted accent. */
+  --color-paper: #faf9f7;
+  --color-surface: #ffffff;
+  --color-ink: #1c1b19;
+  --color-muted: #6f6b66;
+  --color-line: #e7e4df;
+  --color-accent: #4f6f64;
+  --color-accent-soft: #eef2f0;
+  --color-danger: #b4483c;
+  --color-danger-soft: #fdf1ef;
+
+  --radius-card: 1rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+
+  /* Native date inputs keep the theme's typography. */
+  input[type='date'] {
+    @apply font-sans;
+  }
+}
+
+@layer utilities {
+  .animate-rise {
+    animation: rise 0.25s ease-out both;
+  }
+
+  .animate-toast-in {
+    animation: toast-in 0.2s ease-out both;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-rise,
+    .animate-toast-in {
+      animation: none;
+    }
+  }
+}
