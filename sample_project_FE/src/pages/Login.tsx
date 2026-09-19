@@ -87,6 +87,15 @@ export function Login() {
           {...register('password')}
         />
 
+        <div className="text-right">
+          <Link
+            to="/forgot-password"
+            className="text-sm font-medium text-accent underline-offset-4 hover:underline"
+          >
+            Forgot password?
+          </Link>
+        </div>
+
         <Button type="submit" className="w-full" isLoading={isSubmitting} loadingText="Signing in…">
           Login
         </Button>

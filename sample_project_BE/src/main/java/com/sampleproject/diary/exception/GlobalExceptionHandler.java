@@ -85,6 +85,13 @@ public class GlobalExceptionHandler {
                 HttpStatus.UNAUTHORIZED.value(), "Invalid username or password", request.getRequestURI()));
     }
 
+    @ExceptionHandler(InvalidResetPinException.class)
+    public ResponseEntity<ErrorResponse> handleInvalidResetPin(InvalidResetPinException ex,
+                                                                HttpServletRequest request) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ErrorResponse.of(
+                HttpStatus.UNAUTHORIZED.value(), ex.getMessage(), request.getRequestURI()));
+    }
+
     @ExceptionHandler({UnauthorizedException.class, JwtException.class})
     public ResponseEntity<ErrorResponse> handleUnauthorized(RuntimeException ex, HttpServletRequest request) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ErrorResponse.of(

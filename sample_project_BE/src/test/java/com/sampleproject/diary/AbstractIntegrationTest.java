@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sampleproject.diary.dto.LoginRequest;
 import com.sampleproject.diary.dto.RegisterRequest;
 import com.sampleproject.diary.repository.DiaryEntryRepository;
+import com.sampleproject.diary.repository.PasswordResetTokenRepository;
 import com.sampleproject.diary.repository.UserRepository;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,9 +35,14 @@ abstract class AbstractIntegrationTest {
     @Autowired
     protected DiaryEntryRepository diaryEntryRepository;
 
+    @Autowired
+    protected PasswordResetTokenRepository passwordResetTokenRepository;
+
     @BeforeEach
     void cleanDatabase() {
         diaryEntryRepository.deleteAll();
+        // Reset tokens reference users, so they go first.
+        passwordResetTokenRepository.deleteAll();
         userRepository.deleteAll();
     }
 

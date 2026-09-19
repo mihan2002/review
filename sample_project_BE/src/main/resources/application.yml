@@ -24,6 +24,24 @@ spring:
   jackson:
     default-property-inclusion: non_null
 
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    # Your Gmail address; the password is a Google App Password, never the
+    # account password. Leave MAIL_PASSWORD blank to run in dev mode
+    # (see app.password-reset.dev-pin below).
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
 server:
   port: ${SERVER_PORT:8080}
   error:
@@ -37,6 +55,16 @@ app:
     # Token lifetime in seconds (default 24h).
     expiration: ${JWT_EXPIRATION:86400}
     issuer: diary-backend
+
+  password-reset:
+    # Lifetime of a reset PIN, in minutes.
+    ttl-minutes: ${RESET_PIN_TTL_MINUTES:15}
+    # Wrong-PIN attempts allowed before the PIN is burned.
+    max-attempts: ${RESET_PIN_MAX_ATTEMPTS:5}
+    # Used only when no mail app password is configured: the PIN is not
+    # emailed, it is fixed to this value and written to the server log.
+    dev-pin: ${RESET_DEV_PIN:1234}
+    from-address: ${MAIL_FROM:${MAIL_USERNAME:}}
 
 springdoc:
   swagger-ui:

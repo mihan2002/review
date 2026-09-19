@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { AppLayout } from '../components/layout/AppLayout'
 import { CreateDiary } from '../pages/CreateDiary'
 import { Dashboard } from '../pages/Dashboard'
+import { ForgotPassword } from '../pages/ForgotPassword'
 import { DiaryEntryPage } from '../pages/DiaryEntryPage'
 import { EditDiary } from '../pages/EditDiary'
 import { Login } from '../pages/Login'
@@ -18,6 +19,7 @@ export function AppRoutes() {
       <Route element={<PublicOnlyRoute />}>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
       </Route>
 
       <Route element={<ProtectedRoute />}>

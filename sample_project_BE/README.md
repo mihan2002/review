@@ -58,7 +58,8 @@ src/main/java/com/sampleproject/diary/
 ├── repository/   UserRepository, DiaryEntryRepository     (owner-scoped queries)
 ├── security/     JwtService, JwtAuthenticationFilter, AuthenticatedUser,
 │                 CurrentUserProvider, 401/403 JSON handlers
-├── service/      AuthService, DiaryService, DiaryUserDetailsService
+├── service/      AuthService, DiaryService, DiaryUserDetailsService,
+│                 PasswordResetService, PasswordResetMailer
 └── DiaryApplication.java
 ```
 
@@ -77,6 +78,9 @@ User 1 ────< DiaryEntry
 | `email` unique           | `title`, `content`, `entry_date`         |
 | `password_hash` (BCrypt) | `created_at`, `updated_at` (auditing)    |
 | `created_at`             |                                          |
+
+`password_reset_tokens` holds one live PIN per user: `user_id` FK, `pin_hash` (BCrypt — the PIN
+itself is never stored), `expires_at`, `consumed_at`, `attempts`.
 
 Indexes: `user_id`, `entry_date`, and the composite `(user_id, entry_date)` that backs the default
 listing and date-range filter.
@@ -110,6 +114,13 @@ cp .env.example .env
 | `JPA_DDL_AUTO`   | `update`         | Hibernate schema handling (`update` for dev, `validate` for prod) |
 | `JWT_SECRET`     | — (**required**) | HMAC key, **at least 32 characters**                              |
 | `JWT_EXPIRATION` | `86400`          | Token lifetime in seconds (24 h)                                  |
+| `MAIL_HOST`      | `smtp.gmail.com` | SMTP host for reset emails                                        |
+| `MAIL_PORT`      | `587`            | SMTP port (STARTTLS)                                              |
+| `MAIL_USERNAME`  | — (blank)        | Gmail address reset PINs are sent from                            |
+| `MAIL_PASSWORD`  | — (blank)        | Google **App Password**; blank turns on dev mode (see below)      |
+| `RESET_PIN_TTL_MINUTES`  | `15`     | How long a reset PIN stays valid                                  |
+| `RESET_PIN_MAX_ATTEMPTS` | `5`      | Wrong-PIN tries before the PIN is burned                          |
+| `RESET_DEV_PIN`  | `1234`           | Fixed PIN used only while `MAIL_PASSWORD` is blank                |
 
 Generate a secret:
 
@@ -118,6 +129,11 @@ openssl rand -base64 48
 ```
 
 Compose fails fast with a clear message if `DB_PASSWORD` or `JWT_SECRET` is missing.
+
+`MAIL_PASSWORD` is intentionally blank in `.env`. Gmail does not accept an account password over
+SMTP — it needs an **App Password** (Google Account → Security → 2-Step Verification → App
+passwords). Paste that 16-character value into `MAIL_PASSWORD` and set `MAIL_USERNAME` to your Gmail
+address to send real reset emails.
 
 ---
 
@@ -193,6 +209,32 @@ spring:
 4. `JwtAuthenticationFilter` validates the signature and expiry on **every** request and loads the
    identity into the security context. An invalid, expired or missing token yields a JSON `401`.
 
+### Forgotten password
+
+1. `POST /api/auth/forgot-password` — takes an email. It always answers `200` with the same message
+   whether or not the address has an account, so the endpoint cannot be used to discover who is
+   registered. When there is an account, any earlier PIN is deleted and a fresh one is issued.
+2. `POST /api/auth/verify-reset-pin` — checks the PIN **without** spending it, so the UI can move to
+   the new-password step before asking for a password.
+3. `POST /api/auth/reset-password` — consumes the PIN and replaces the password hash. Sign in again
+   with the new password.
+
+Only a BCrypt hash of the PIN is stored. A PIN expires after `RESET_PIN_TTL_MINUTES`, works once,
+and is burned after `RESET_PIN_MAX_ATTEMPTS` wrong tries; every failure returns the same `401`
+message.
+
+**Dev mode.** With `MAIL_PASSWORD` blank the server sends no mail. Instead the PIN is fixed to
+`RESET_DEV_PIN` (`1234`) and logged at WARN, e.g.:
+
+```
+WARN  c.s.diary.service.PasswordResetMailer : Mail app password not configured — dev mode.
+      Reset PIN for someone@example.com is 1234 (valid 15 minutes).
+```
+
+Copy it from the console into the UI. With a real App Password configured the PIN is a random
+six-digit number and is emailed; if the SMTP send fails, the PIN is logged so the reset can still
+be completed.
+
 The JWT carries the username (`sub`) and the user id (`uid`) claim. The signing secret lives only in
 the environment.
 
@@ -204,6 +246,9 @@ the environment.
 | ------ | ------------------------------------ | ---- | -------------------------------- | ------- |
 | POST   | `/api/auth/register`                 | —    | Register a user                  | `201`   |
 | POST   | `/api/auth/login`                    | —    | Obtain a JWT                     | `200`   |
+| POST   | `/api/auth/forgot-password`          | —    | Email a one-time reset PIN       | `200`   |
+| POST   | `/api/auth/verify-reset-pin`         | —    | Check a PIN without spending it  | `200`   |
+| POST   | `/api/auth/reset-password`           | —    | Set a new password with the PIN  | `200`   |
 | POST   | `/api/diaries`                       | JWT  | Create an entry (owner = caller) | `201`   |
 | GET    | `/api/diaries?page=&size=&from=&to=` | JWT  | List own entries, newest first   | `200`   |
 | GET    | `/api/diaries/search?keyword=`       | JWT  | Search own title + content       | `200`   |
@@ -349,5 +394,7 @@ PostgreSQL. 20 tests cover:
 - Passwords are stored only as BCrypt hashes and never appear in any response.
 - The JWT secret and database credentials come from environment variables; `.env` is gitignored.
 - Stateless sessions; `server.error.include-stacktrace: never`.
-- Token contents and credentials are never logged.
+- Token contents and credentials are never logged. (Reset PINs are logged **only** in dev mode,
+  when no mail app password is configured and no email can be sent.)
+- Reset PINs are stored as BCrypt hashes, expire, are single-use, and are rate-limited by attempt count.
 - Every diary read/write/search/delete is owner-scoped at the repository query level.

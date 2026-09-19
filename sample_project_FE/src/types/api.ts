@@ -63,6 +63,29 @@ export interface AuthResponse {
   expiresIn: number
 }
 
+/** ForgotPasswordRequest — POST /api/auth/forgot-password */
+export interface ForgotPasswordRequest {
+  email: string
+}
+
+/** VerifyResetPinRequest — POST /api/auth/verify-reset-pin */
+export interface VerifyResetPinRequest {
+  email: string
+  pin: string
+}
+
+/** ResetPasswordRequest — POST /api/auth/reset-password */
+export interface ResetPasswordRequest {
+  email: string
+  pin: string
+  newPassword: string
+}
+
+/** MessageResponse — plain confirmation returned by the password-reset endpoints */
+export interface MessageResponse {
+  message: string
+}
+
 /** ErrorResponse — the shape every failing request returns */
 export interface ApiErrorResponse {
   status: number

@@ -35,6 +35,14 @@ services:
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set in .env}
       JWT_EXPIRATION: ${JWT_EXPIRATION:-86400}
       JPA_DDL_AUTO: ${JPA_DDL_AUTO:-update}
+      # Leave MAIL_PASSWORD blank in .env to run without email (dev PIN).
+      MAIL_HOST: ${MAIL_HOST:-smtp.gmail.com}
+      MAIL_PORT: ${MAIL_PORT:-587}
+      MAIL_USERNAME: ${MAIL_USERNAME:-}
+      MAIL_PASSWORD: ${MAIL_PASSWORD:-}
+      RESET_PIN_TTL_MINUTES: ${RESET_PIN_TTL_MINUTES:-15}
+      RESET_PIN_MAX_ATTEMPTS: ${RESET_PIN_MAX_ATTEMPTS:-5}
+      RESET_DEV_PIN: ${RESET_DEV_PIN:-1234}
     ports:
       - "${SERVER_PORT:-8080}:8080"
 

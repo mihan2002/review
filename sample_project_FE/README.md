@@ -76,14 +76,15 @@ The base URL is read in exactly one place (`src/api/axios.ts`); no URL is hardco
 src/
 ├── api/          axios instance (auth header + 401 handling), authApi, diaryApi
 ├── components/
-│   ├── auth/     AuthCard shell for login/register
+│   ├── auth/     AuthCard shell for login/register/forgot-password
 │   ├── common/   Button, TextField, TextArea, PasswordField, Pagination,
 │   │             ConfirmDialog, EmptyState, ErrorState, Skeleton, ToastViewport
 │   ├── diary/    DiaryCard, DiaryForm, DiaryFilters, DiaryListSkeleton
 │   └── layout/   AppLayout, Header
 ├── context/      AuthProvider + ToastProvider (and their context objects)
 ├── hooks/        useAuth, useToast, useDiaries (TanStack Query), useDebouncedValue
-├── pages/        Login, Register, Dashboard, DiaryEntryPage, CreateDiary, EditDiary, NotFound
+├── pages/        Login, Register, ForgotPassword, Dashboard, DiaryEntryPage,
+│                 CreateDiary, EditDiary, NotFound
 ├── routes/       AppRoutes, ProtectedRoute, PublicOnlyRoute
 ├── types/        api.ts — the single source of truth for backend DTOs
 └── utils/        date, text, errors, jwt, cn
@@ -100,6 +101,9 @@ Endpoints consumed (verified against the backend's OpenAPI document at
 | -------- | ----------------------------------------- | -------------------------- |
 | `POST`   | `/api/auth/register`                      | Register                   |
 | `POST`   | `/api/auth/login`                         | Login                      |
+| `POST`   | `/api/auth/forgot-password`               | Request a reset PIN        |
+| `POST`   | `/api/auth/verify-reset-pin`              | Check a reset PIN          |
+| `POST`   | `/api/auth/reset-password`                | Set a new password         |
 | `GET`    | `/api/diaries?from&to&page&size`          | Dashboard list + filters   |
 | `GET`    | `/api/diaries/search?keyword&page&size`   | Dashboard search           |
 | `GET`    | `/api/diaries/{id}`                       | View / edit entry          |
@@ -127,7 +131,21 @@ Notes on matching the real contract:
 - A `401` on any non-auth request clears the session and returns you to `/login`; a `401` from the
   login endpoint is shown as an invalid-credentials message instead.
 - `/dashboard`, `/diary/new`, `/diary/:id` and `/diary/:id/edit` require a session.
-  `/login` and `/register` redirect to `/dashboard` when you already have one.
+  `/login`, `/register` and `/forgot-password` redirect to `/dashboard` when you already have one.
+
+### Forgotten password
+
+`/forgot-password` (linked from the login form) runs three steps on one route, so the email and PIN
+survive a step back and never appear in the URL:
+
+1. **Email** — `POST /api/auth/forgot-password`. The backend answers the same way for unknown
+   addresses, so the screen says "if that email has an account" rather than confirming one exists.
+2. **PIN** — `POST /api/auth/verify-reset-pin` checks the PIN without spending it. There are
+   "Use a different email" and "Send another PIN" escapes.
+3. **New password** — `POST /api/auth/reset-password`, then a redirect to `/login` with a toast.
+
+The PIN field accepts 4–8 digits, matching the backend. While the backend has no mail app password
+configured it does not send email: the PIN is `1234` and is printed in the backend console.
 
 ---
 
@@ -141,6 +159,7 @@ Notes on matching the real contract:
 - **Writing** — one `DiaryForm` shared by create and edit, validated with Zod against the backend's
   own rules (title ≤ 200, content ≤ 20 000, date required).
 - **Delete** — always behind a confirmation dialog, with a success toast.
+- **Password reset** — three-step flow from the login screen; see section 7.
 - **Errors** — 400/401/403/404/409/500 and network failures are mapped to short, human messages in
   `src/utils/errors.ts`; field-level validation errors from the backend are surfaced verbatim. Raw
   responses and stack traces are never shown.
