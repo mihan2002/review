@@ -23,16 +23,27 @@ public interface DiaryEntryRepository extends JpaRepository<DiaryEntry, UUID> {
 
     void deleteByIdAndUserId(UUID id, UUID userId);
 
-    @Query("""
-            select d from DiaryEntry d
-            where d.user.id = :userId
-              and (:from is null or d.entryDate >= :from)
-              and (:to is null or d.entryDate <= :to)
-            """)
-    Page<DiaryEntry> findByUserAndDateRange(@Param("userId") UUID userId,
-                                            @Param("from") LocalDate from,
-                                            @Param("to") LocalDate to,
-                                            Pageable pageable);
+    /*
+     * The date range is expressed as four separate queries rather than one query with
+     * "(:from is null or ...)" guards: PostgreSQL cannot infer a type for a parameter
+     * that only ever appears next to "is null", and rejects the statement with
+     * "could not determine data type of parameter" (SQLState 42P18).
+     */
+
+    Page<DiaryEntry> findByUserId(UUID userId, Pageable pageable);
+
+    Page<DiaryEntry> findByUserIdAndEntryDateBetween(UUID userId,
+                                                     LocalDate from,
+                                                     LocalDate to,
+                                                     Pageable pageable);
+
+    Page<DiaryEntry> findByUserIdAndEntryDateGreaterThanEqual(UUID userId,
+                                                              LocalDate from,
+                                                              Pageable pageable);
+
+    Page<DiaryEntry> findByUserIdAndEntryDateLessThanEqual(UUID userId,
+                                                           LocalDate to,
+                                                           Pageable pageable);
 
     @Query("""
             select d from DiaryEntry d

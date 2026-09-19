@@ -64,7 +64,7 @@ public class DiaryService {
             throw new IllegalArgumentException("'from' must not be after 'to'");
         }
         UUID userId = currentUserProvider.requireCurrentUserId();
-        Page<DiaryEntry> entries = diaryEntryRepository.findByUserAndDateRange(userId, from, to, pageable(page, size));
+        Page<DiaryEntry> entries = findInRange(userId, from, to, pageable(page, size));
         return PageResponse.of(entries, DiaryEntryResponse::from);
     }
 
@@ -107,6 +107,20 @@ public class DiaryService {
         UUID userId = currentUserProvider.requireCurrentUserId();
         return diaryEntryRepository.findByIdAndUserId(id, userId)
                 .orElseThrow(() -> new ResourceNotFoundException("Diary entry not found"));
+    }
+
+    /** Picks the query matching which bounds were supplied; see the repository for why. */
+    private Page<DiaryEntry> findInRange(UUID userId, LocalDate from, LocalDate to, Pageable pageable) {
+        if (from != null && to != null) {
+            return diaryEntryRepository.findByUserIdAndEntryDateBetween(userId, from, to, pageable);
+        }
+        if (from != null) {
+            return diaryEntryRepository.findByUserIdAndEntryDateGreaterThanEqual(userId, from, pageable);
+        }
+        if (to != null) {
+            return diaryEntryRepository.findByUserIdAndEntryDateLessThanEqual(userId, to, pageable);
+        }
+        return diaryEntryRepository.findByUserId(userId, pageable);
     }
 
     private Pageable pageable(int page, int size) {
