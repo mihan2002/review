@@ -13,8 +13,8 @@ import { getErrorMessage } from '../utils/errors'
 
 // The backend authenticates by username, not email (see LoginRequest).
 const loginSchema = z.object({
-  username: z.string().trim().min(1, 'Please enter your username.'),
-  password: z.string().min(1, 'Please enter your password.'),
+  username: z.string().trim().min(1, 'The cabinet needs your username.'),
+  password: z.string().min(1, 'The cabinet needs your key.'),
 })
 
 type LoginValues = z.infer<typeof loginSchema>
@@ -45,29 +45,29 @@ export function Login() {
     setFormError(null)
     try {
       await login(values)
-      showToast('Welcome back.')
+      showToast('The cabinet is open.')
       navigate(redirectTo, { replace: true })
     } catch (error) {
-      setFormError(getErrorMessage(error, 'Unable to sign in. Please try again.'))
+      setFormError(getErrorMessage(error, 'The cabinet would not open. Please try again.'))
     }
   }
 
   return (
     <AuthCard
-      title="Sign in"
-      subtitle="Welcome back"
+      title="Unlock the cabinet"
+      subtitle="Card Catalog &middot; one holder only"
       footer={
         <>
-          Don&rsquo;t have an account?{' '}
-          <Link to="/register" className="font-medium text-accent underline-offset-4 hover:underline">
-            Create account
+          No cabinet yet?{' '}
+          <Link to="/register" className="font-bold text-case-ink underline decoration-brass underline-offset-4">
+            Open one
           </Link>
         </>
       }
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
         {formError && (
-          <p role="alert" className="rounded-lg bg-danger-soft px-3 py-2.5 text-sm text-danger">
+          <p role="alert" className="record border border-dashed border-stamp/70 px-3 py-2.5 font-bold text-stamp">
             {formError}
           </p>
         )}
@@ -81,14 +81,14 @@ export function Login() {
         />
 
         <PasswordField
-          label="Password"
+          label="Key"
           autoComplete="current-password"
           error={errors.password?.message}
           {...register('password')}
         />
 
-        <Button type="submit" className="w-full" isLoading={isSubmitting} loadingText="Signing in…">
-          Login
+        <Button type="submit" className="w-full" isLoading={isSubmitting} loadingText="Unlocking">
+          Unlock
         </Button>
       </form>
     </AuthCard>

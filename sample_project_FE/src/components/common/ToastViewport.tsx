@@ -1,4 +1,4 @@
-import { AlertCircle, CheckCircle2, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import type { Toast } from '../../context/toastContext'
 import { cn } from '../../utils/cn'
 
@@ -7,6 +7,7 @@ interface ToastViewportProps {
   onDismiss: (id: number) => void
 }
 
+/** Receipts: a slip stamped and dropped on the desk after each transaction. */
 export function ToastViewport({ toasts, onDismiss }: ToastViewportProps) {
   if (toasts.length === 0) return null
 
@@ -20,23 +21,27 @@ export function ToastViewport({ toasts, onDismiss }: ToastViewportProps) {
         <div
           key={toast.id}
           className={cn(
-            'animate-toast-in pointer-events-auto flex w-full max-w-sm items-start gap-3 rounded-xl border bg-surface px-4 py-3 shadow-lg shadow-ink/5',
-            toast.variant === 'error' ? 'border-danger/30' : 'border-line',
+            'card card-fiber stamp-in pointer-events-auto flex w-full max-w-sm items-start gap-3 py-3 pr-2 pl-4',
+            toast.variant === 'error' && 'shadow-[0_0_0_1.5px_var(--color-stamp),var(--shadow-card)]',
           )}
         >
-          {toast.variant === 'error' ? (
-            <AlertCircle className="mt-0.5 size-4 shrink-0 text-danger" aria-hidden="true" />
-          ) : (
-            <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-accent" aria-hidden="true" />
-          )}
-          <p className="flex-1 text-sm text-ink">{toast.message}</p>
+          <span
+            aria-hidden="true"
+            className={cn(
+              'record-sm mt-[0.2rem] shrink-0 font-bold',
+              toast.variant === 'error' ? 'text-stamp' : 'text-ink-soft',
+            )}
+          >
+            {toast.variant === 'error' ? 'REJ' : 'REC'}
+          </span>
+          <p className="hand flex-1 text-[0.9375rem] leading-snug text-ink">{toast.message}</p>
           <button
             type="button"
             onClick={() => onDismiss(toast.id)}
-            aria-label="Dismiss notification"
-            className="rounded-md p-1 text-muted transition-colors hover:bg-paper hover:text-ink"
+            aria-label="Dismiss notice"
+            className="rounded-[1px] p-1.5 text-ink-soft transition-colors hover:bg-[color-mix(in_oklab,var(--color-rule)_45%,transparent)] hover:text-ink"
           >
-            <X className="size-4" aria-hidden="true" />
+            <X className="size-4" strokeWidth={1.75} aria-hidden="true" />
           </button>
         </div>
       ))}

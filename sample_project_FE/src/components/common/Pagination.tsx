@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '../../utils/cn'
+import { typedCount } from '../../utils/catalog'
 
 interface PaginationProps {
   /** Zero-based, as the backend reports it. */
@@ -13,13 +14,14 @@ interface PaginationProps {
 
 const MAX_NUMBERED = 5
 
-/** A compact window of page numbers around the current page. */
+/** A compact window of tray numbers around the current tray. */
 function pageWindow(page: number, totalPages: number): number[] {
   const count = Math.min(MAX_NUMBERED, totalPages)
   const start = Math.max(0, Math.min(page - Math.floor(count / 2), totalPages - count))
   return Array.from({ length: count }, (_, index) => start + index)
 }
 
+/** The drawer's foot: which tray you are in, and the brass pulls either side. */
 export function Pagination({
   page,
   totalPages,
@@ -35,23 +37,28 @@ export function Pagination({
 
   return (
     <nav
-      aria-label="Diary entry pages"
-      className="flex flex-col items-center gap-4 border-t border-line pt-6 sm:flex-row sm:justify-between"
+      aria-label="Card trays"
+      className="flex flex-col items-center gap-5 border-t border-brass/30 pt-6 sm:flex-row sm:justify-between"
     >
-      <p className="text-xs text-muted" aria-live="polite">
-        Showing {firstItem}&ndash;{lastItem} of {totalElements} {totalElements === 1 ? 'entry' : 'entries'}
+      <p className="record text-deep-ink-soft" aria-live="polite">
+        Cards {typedCount(firstItem)}&ndash;{typedCount(lastItem)} of {typedCount(totalElements)}
+        {totalPages > 1 && (
+          <>
+            {' · '}Tray {page + 1}/{totalPages}
+          </>
+        )}
       </p>
 
       {totalPages > 1 && (
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <button
             type="button"
             onClick={() => onPageChange(page - 1)}
             disabled={page === 0}
-            className="inline-flex h-9 items-center gap-1 rounded-lg px-2.5 text-sm text-muted transition-colors hover:bg-accent-soft hover:text-ink disabled:pointer-events-none disabled:opacity-40"
+            className="btn btn-case min-h-9 px-2.5"
           >
-            <ChevronLeft className="size-4" aria-hidden="true" />
-            <span className="hidden sm:inline">Previous</span>
+            <ChevronLeft className="size-4" strokeWidth={2} aria-hidden="true" />
+            <span className="hidden sm:inline">Back</span>
           </button>
 
           {pageWindow(page, totalPages).map((index) => (
@@ -60,10 +67,10 @@ export function Pagination({
               type="button"
               onClick={() => onPageChange(index)}
               aria-current={index === page ? 'page' : undefined}
-              aria-label={`Page ${index + 1}`}
+              aria-label={`Tray ${index + 1}`}
               className={cn(
-                'size-9 rounded-lg text-sm transition-colors',
-                index === page ? 'bg-accent text-white' : 'text-muted hover:bg-accent-soft hover:text-ink',
+                'btn min-h-9 min-w-9 px-0 text-[0.625rem]',
+                index === page ? 'btn-brass' : 'btn-case',
               )}
             >
               {index + 1}
@@ -74,10 +81,10 @@ export function Pagination({
             type="button"
             onClick={() => onPageChange(page + 1)}
             disabled={page >= totalPages - 1}
-            className="inline-flex h-9 items-center gap-1 rounded-lg px-2.5 text-sm text-muted transition-colors hover:bg-accent-soft hover:text-ink disabled:pointer-events-none disabled:opacity-40"
+            className="btn btn-case min-h-9 px-2.5"
           >
             <span className="hidden sm:inline">Next</span>
-            <ChevronRight className="size-4" aria-hidden="true" />
+            <ChevronRight className="size-4" strokeWidth={2} aria-hidden="true" />
           </button>
         </div>
       )}

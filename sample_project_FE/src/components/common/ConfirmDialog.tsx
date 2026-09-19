@@ -14,15 +14,16 @@ interface ConfirmDialogProps {
 }
 
 /**
- * A modal confirmation built on <dialog>, so focus trapping, Esc and the
- * backdrop come from the platform.
+ * A withdrawal slip: the one interruption the cabinet permits, because pulling
+ * a card out for good cannot be undone. Built on <dialog>, so focus trapping,
+ * Esc and the backdrop come from the platform.
  */
 export function ConfirmDialog({
   open,
   title,
   description,
-  confirmLabel = 'Delete',
-  cancelLabel = 'Cancel',
+  confirmLabel = 'Withdraw card',
+  cancelLabel = 'Keep it filed',
   isLoading = false,
   loadingText,
   onConfirm,
@@ -50,20 +51,20 @@ export function ConfirmDialog({
         // Clicking the backdrop (the dialog element itself) dismisses it.
         if (event.target === dialogRef.current && !isLoading) onCancel()
       }}
-      className="m-auto w-[calc(100%-2rem)] max-w-md rounded-card border border-line bg-surface p-0 text-ink shadow-xl backdrop:bg-ink/30"
+      className="card card-fiber m-auto w-[calc(100%-2rem)] max-w-md p-0 backdrop:bg-[rgb(10_7_3/0.72)] backdrop:backdrop-blur-[2px]"
     >
-      <div className="space-y-3 p-6">
-        <h2 id="confirm-dialog-title" className="font-serif text-lg text-ink">
+      <div className="px-6 pt-6 pb-5">
+        <h2 id="confirm-dialog-title" className="record-prose text-xl leading-tight font-bold text-ink">
           {title}
         </h2>
-        <div className="text-sm leading-6 text-muted">{description}</div>
+        <div className="record-prose mt-2.5 text-[0.9375rem] text-ink-soft">{description}</div>
       </div>
 
-      <div className="flex flex-col-reverse gap-2 border-t border-line px-6 py-4 sm:flex-row sm:justify-end">
-        <Button variant="secondary" onClick={onCancel} disabled={isLoading}>
+      <div className="flex flex-col-reverse gap-2 border-t border-dashed border-rule px-6 py-4 sm:flex-row sm:justify-end">
+        <Button variant="quiet" onClick={onCancel} disabled={isLoading}>
           {cancelLabel}
         </Button>
-        <Button variant="danger" onClick={onConfirm} isLoading={isLoading} loadingText={loadingText}>
+        <Button variant="stamp" onClick={onConfirm} isLoading={isLoading} loadingText={loadingText}>
           {confirmLabel}
         </Button>
       </div>

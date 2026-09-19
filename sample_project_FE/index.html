@@ -4,16 +4,55 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A calm, personal diary for capturing your days." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@500;600&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="description" content="A private diary, filed and retrievable like a library card catalog." />
+    <meta name="theme-color" content="#241B12" />
     <title>My Diary</title>
+    <script>
+      // Set the cabinet's light before first paint so the drawer never flashes.
+      (function () {
+        try {
+          var stored = localStorage.getItem('diary.theme')
+          var theme =
+            stored === 'day' || stored === 'night'
+              ? stored
+              : window.matchMedia('(prefers-color-scheme: light)').matches
+                ? 'day'
+                : 'night'
+          document.documentElement.setAttribute('data-theme', theme)
+          document.documentElement.style.colorScheme = theme === 'day' ? 'light' : 'dark'
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'night')
+        }
+      })()
+    </script>
   </head>
   <body>
+    <!--
+      IMPECCABLE DIRECTION CONTRACT — seed dd09cba6
+
+      THESIS: The archive is a card catalog, not a feed. It refuses the column of
+      soft cards under a greeting that every journalling app ships.
+
+      OWN-WORLD: Varnished-oak cabinet ground; buff manila cards, ruled and punched
+      for the filing rod; brass rails, guide tabs and pulls; typewriter carbon
+      (Courier Prime) for everything the catalog says, Faustina for everything the
+      author wrote; rubber-stamp red for amendments and deletion; square 2px corners.
+
+      STORY: You pull a drawer, thumb past guide tabs to a day, lift the card and
+      read it. Writing types a new card into the machine.
+
+      FIRST VIEWPORT: Cabinet header with a brass label holder and the holder's name
+      card; the drawer below it; today's blank card as the primary action, brass
+      flooded; the enquiry slip carrying keyword and drawer range; then the filed
+      stack, guide tabs standing proud at every date break.
+
+      FORM: Card Catalog — candidate 1 of seven grounded directions, locked by the
+      user over the assigned roll. Seed key dd09cba6.
+
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the
+      finish review, the verdict, DESIGN.md, and every shipping raster carrying its
+      provenance.
+    -->
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-19T00:00:00.000Z",
+  "title": "Design System: My Diary — The Card Catalog",
+  "extensions": {
+    "colorMeta": {
+      "case": {
+        "role": "neutral",
+        "displayName": "Varnished Oak Case",
+        "canonical": "#241b12",
+        "note": "Page ground. Carries a three-layer repeating-gradient grain. Day theme: #c0a880.",
+        "tonalRamp": ["oklch(15% 0.03 62)", "oklch(25% 0.035 62)", "oklch(35% 0.04 62)", "oklch(45% 0.045 62)", "oklch(55% 0.05 62)", "oklch(68% 0.05 62)", "oklch(82% 0.04 62)", "oklch(95% 0.02 62)"]
+      },
+      "deep": {
+        "role": "neutral",
+        "displayName": "The Recess",
+        "canonical": "#17110a",
+        "note": "Drawer interiors and the sticky top rail. Dark in both themes. Day theme: #6b563c.",
+        "tonalRamp": ["oklch(15% 0.02 70)", "oklch(25% 0.025 70)", "oklch(35% 0.03 70)", "oklch(45% 0.035 70)", "oklch(55% 0.04 70)", "oklch(68% 0.04 70)", "oklch(82% 0.03 70)", "oklch(95% 0.015 70)"]
+      },
+      "card": {
+        "role": "neutral",
+        "displayName": "Buff Manila Card Stock",
+        "canonical": "#dfd3b6",
+        "note": "Every card, panel, field, tab and dialog. Day theme lifts it to #efe6cf.",
+        "tonalRamp": ["oklch(15% 0.02 86)", "oklch(25% 0.03 86)", "oklch(35% 0.035 86)", "oklch(45% 0.04 86)", "oklch(58% 0.045 86)", "oklch(72% 0.045 86)", "oklch(86% 0.04 86)", "oklch(95% 0.025 86)"]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Printed Ruling",
+        "canonical": "#bfae84",
+        "note": "The ruled lines of a 3x5 card and every dashed divider inside one. Day theme: #cdbc94.",
+        "tonalRamp": ["oklch(15% 0.02 86)", "oklch(25% 0.03 86)", "oklch(35% 0.04 86)", "oklch(45% 0.045 86)", "oklch(55% 0.05 86)", "oklch(66% 0.05 86)", "oklch(80% 0.04 86)", "oklch(95% 0.02 86)"]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Typewriter Carbon",
+        "canonical": "#191309",
+        "note": "All text on card stock. Identical in both themes; soft variant #5e5138 (day #6b5d42).",
+        "tonalRamp": ["oklch(15% 0.02 78)", "oklch(25% 0.025 78)", "oklch(35% 0.03 78)", "oklch(45% 0.03 78)", "oklch(55% 0.03 78)", "oklch(68% 0.025 78)", "oklch(82% 0.02 78)", "oklch(95% 0.01 78)"]
+      },
+      "brass": {
+        "role": "primary",
+        "displayName": "Cabinet Brass",
+        "canonical": "#b08a3e",
+        "note": "Hardware only: label holders, pulls, rails, primary button faces, the blank card, scrollbar thumb. Bright variant #d8ab50. Never a text colour.",
+        "tonalRamp": ["oklch(15% 0.04 82)", "oklch(25% 0.06 82)", "oklch(35% 0.08 82)", "oklch(45% 0.09 82)", "oklch(55% 0.095 82)", "oklch(65% 0.1 82)", "oklch(80% 0.08 82)", "oklch(95% 0.04 82)"]
+      },
+      "stamp": {
+        "role": "secondary",
+        "displayName": "Rubber-Stamp Red",
+        "canonical": "#9b2318",
+        "note": "Amendment, withdrawal, rejection, today's marker, a writing run, the text caret. Outline and hairline only — never a flooded surface.",
+        "tonalRamp": ["oklch(15% 0.06 32)", "oklch(25% 0.1 32)", "oklch(35% 0.14 32)", "oklch(45% 0.16 32)", "oklch(55% 0.17 32)", "oklch(66% 0.15 32)", "oklch(80% 0.1 32)", "oklch(95% 0.04 32)"]
+      },
+      "focus": {
+        "role": "primary",
+        "displayName": "Focus Brass",
+        "canonical": "#d8ab50",
+        "note": "Global :focus-visible ring, 2px solid with 2px offset and a 1px radius. Day theme drops to a dark #3a2c10 for contrast against light stock.",
+        "tonalRamp": ["oklch(15% 0.04 82)", "oklch(25% 0.06 82)", "oklch(35% 0.08 82)", "oklch(45% 0.1 82)", "oklch(58% 0.11 82)", "oklch(70% 0.11 82)", "oklch(84% 0.08 82)", "oklch(95% 0.04 82)"]
+      }
+    },
+    "typographyMeta": {
+      "drawer-head": { "displayName": "Drawer Head", "purpose": "The dashboard's date headline. The catalog announcing which drawer is open — typewriter, not the author's hand." },
+      "entry-title": { "displayName": "Entry Title", "purpose": "The author's own heading on a lifted card." },
+      "card-title": { "displayName": "Card Title", "purpose": "The author's heading on a filed card in the drawer." },
+      "hand-body": { "displayName": "The Author's Hand", "purpose": "Entry body and card excerpts. Leading locked to the card's 1.75rem ruling; measure capped at 68ch." },
+      "record-prose": { "displayName": "Record Prose", "purpose": "The catalog speaking in full sentences — dialogs, empty states, auth headings, status lines. Still the typewriter." },
+      "record": { "displayName": "Record Label", "purpose": "The default catalog label: call numbers, field labels, buttons, counts." },
+      "record-sm": { "displayName": "Record Small", "purpose": "Tab fields, meta lines, legends, hints." },
+      "stamp": { "displayName": "Stamp", "purpose": "The rubber-stamp mark in a card's corner, rotated -3deg." }
+    },
+    "shadows": [
+      { "name": "card", "value": "0 1px 2px rgb(0 0 0 / 0.28), 0 8px 18px -10px rgb(0 0 0 / 0.6)", "purpose": "A card lying at rest in a drawer: tight contact shadow plus a long soft cast. Day theme casts warm brown at lower alpha." },
+      { "name": "lift", "value": "0 2px 4px rgb(0 0 0 / 0.3), 0 18px 30px -14px rgb(0 0 0 / 0.68)", "purpose": "A card raised 7px by hover; the cast lengthens as the card leaves the stack." },
+      { "name": "drawer", "value": "inset 0 2px 10px rgb(0 0 0 / 0.55), inset 0 -1px 0 rgb(255 255 255 / 0.05)", "purpose": "The recess: drawer interiors and anything cut into the case." },
+      { "name": "brass-bevel", "value": "inset 0 1px 0 rgb(255 255 255 / 0.5), inset 0 -1px 0 rgb(0 0 0 / 0.3), 0 1px 2px rgb(0 0 0 / 0.35)", "purpose": "Every brass face, paired with a bright-to-shade vertical gradient." },
+      { "name": "press", "value": "inset 0 2px 4px rgb(0 0 0 / 0.35), 0 1px 1px rgb(0 0 0 / 0.3)", "purpose": "Active state on brass: the surface pushed down into the case." },
+      { "name": "punch", "value": "inset 0 1px 1px rgb(0 0 0 / 0.55)", "purpose": "The filing-rod hole; deepens to 0 2px 4px / 0.75 while a card is lifted." }
+    ],
+    "motion": [
+      { "name": "ease-rail", "value": "cubic-bezier(0.16, 0.84, 0.28, 1)", "purpose": "The drawer rail. Carries every travel, lift and settle in the system." },
+      { "name": "file-in", "value": "300ms ease-rail both — translate -9px to 0, clip-path inset(0 0 11px 0) to 0, shadow travelling from lifted to resting on .card", "purpose": "The one authored moment: a card dropping onto the filing rod. It starts fully visible; no opacity is used." },
+      { "name": "file-in-stagger", "value": "min(index, 8) * 35ms", "purpose": "A page of cards files itself in order rather than arriving at once." },
+      { "name": "stamp-in", "value": "220ms ease-rail both — opacity 0 to 1, scale 1.08 to 1, rotate -1.5deg to 0", "purpose": "The receipt: a stamp pressed onto a toast slip. The only place opacity animates." },
+      { "name": "lift", "value": "translate 190ms ease-rail, box-shadow 190ms ease-rail", "purpose": "Hover on a card or the blank card: -7px of real travel with the shadow lengthening." },
+      { "name": "control", "value": "140ms ease-out (colour, shadow) / 160ms ease-rail (translate)", "purpose": "Button and field state changes." },
+      { "name": "reduced-motion", "value": "prefers-reduced-motion: file-in / file-in-card / stamp-in set to none, .liftable keeps only a 170ms shadow change, all durations clamped to 0.001ms", "purpose": "Every authored moment is removed; the hover shadow remains as the only feedback." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "container", "value": "64rem (max-w-5xl)" }
+    ],
+    "themes": {
+      "night": { "default": true, "note": "A dim bedroom at 11pm. color-scheme: dark.", "case": "#241b12", "case-ink": "#e4dac2", "case-ink-soft": "#c4a05a", "deep": "#17110a", "deep-ink": "#e4dac2", "deep-ink-soft": "#cfae6a", "card": "#dfd3b6", "card-sunk": "#cdbf9c", "rule": "#bfae84", "ink": "#191309", "ink-soft": "#5e5138", "focus": "#d8ab50" },
+      "day": { "default": false, "note": "A reading room under daylight, set on [data-theme='day']; color-scheme: light. The case becomes daylit timber and the recess mid walnut — card stock, ink, brass and stamp red hold their values.", "case": "#c0a880", "case-ink": "#241b12", "case-ink-soft": "#40301a", "deep": "#6b563c", "deep-ink": "#f6eedc", "deep-ink-soft": "#ecd09a", "card": "#efe6cf", "card-sunk": "#ddd0ae", "rule": "#cdbc94", "ink": "#191309", "ink-soft": "#6b5d42", "focus": "#3a2c10" }
+    },
+    "browserSurfaces": [
+      { "name": "selection", "value": "::selection { background: #d8ab50; color: #191309 }", "purpose": "Brass highlight over carbon ink." },
+      { "name": "caret", "value": "input, textarea { caret-color: #9b2318 }", "purpose": "The red ribbon in the typewriter." },
+      { "name": "scrollbar", "value": "12px track #17110a, thumb #b08a3e with a 3px track-coloured border, square; hover #d8ab50", "purpose": "A brass rail running down the side of the case." },
+      { "name": "focus-ring", "value": ":focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: 1px }", "purpose": "One ring for the whole system; fields substitute a thickened ink baseline." },
+      { "name": "links", "value": "a { text-underline-offset: 0.22em; text-decoration-thickness: 1px }", "purpose": "Underlines sit clear of the descenders, hairline weight." },
+      { "name": "date-picker", "value": "input[type=date]::-webkit-calendar-picker-indicator { filter: saturate(0) brightness(0.35); opacity: 0.75 }", "purpose": "The native picker desaturated into carbon so it belongs to the drawer." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Brass Button (primary)",
+      "kind": "button",
+      "refersTo": "button-brass",
+      "description": "The cabinet's own hardware carrying the primary action.",
+      "html": "<button class=\"ds-btn ds-btn-brass\">File the card</button>",
+      "css": ".ds-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; min-height: 2.75rem; padding: 0 1.15rem; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; border: 0; border-radius: 2px; cursor: pointer; transition: background-color 140ms ease-out, color 140ms ease-out, box-shadow 140ms ease-out, translate 160ms cubic-bezier(0.16,0.84,0.28,1); } .ds-btn-brass { background-image: linear-gradient(180deg, color-mix(in oklab, var(--color-brass-bright, #d8ab50) 92%, white) 0%, var(--color-brass, #b08a3e) 42%, color-mix(in oklab, var(--color-brass, #b08a3e) 74%, black) 100%); color: #1a1204; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), inset 0 -1px 0 rgb(0 0 0 / 0.32), 0 2px 3px rgb(0 0 0 / 0.35); } .ds-btn-brass:hover { translate: 0 -1px; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.6), inset 0 -1px 0 rgb(0 0 0 / 0.32), 0 4px 8px rgb(0 0 0 / 0.4); } .ds-btn-brass:active { translate: 0 1px; box-shadow: inset 0 2px 4px rgb(0 0 0 / 0.35), 0 1px 1px rgb(0 0 0 / 0.3); } .ds-btn-brass:focus-visible { outline: 2px solid var(--color-focus, #d8ab50); outline-offset: 2px; border-radius: 1px; }"
+    },
+    {
+      "name": "Case Button",
+      "kind": "button",
+      "refersTo": "button-case",
+      "description": "A control standing on a recessed surface — the top rail or an open drawer.",
+      "html": "<button class=\"ds-btn ds-btn-case\">Lock</button>",
+      "css": ".ds-btn-case { background-color: transparent; color: var(--color-deep-ink, #e4dac2); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-brass, #b08a3e) 60%, transparent); } .ds-btn-case:hover { background-color: color-mix(in oklab, var(--color-brass, #b08a3e) 22%, transparent); } .ds-btn-case:focus-visible { outline: 2px solid var(--color-focus, #d8ab50); outline-offset: 2px; }"
+    },
+    {
+      "name": "Stamp Button",
+      "kind": "button",
+      "refersTo": "button-stamp",
+      "description": "The red ribbon, reserved for withdrawing a card.",
+      "html": "<button class=\"ds-btn ds-btn-stamp\"><svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6\"/></svg>Withdraw</button>",
+      "css": ".ds-btn-stamp { background-color: transparent; color: var(--color-stamp, #9b2318); box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-stamp, #9b2318) 55%, transparent); } .ds-btn-stamp:hover { background-color: color-mix(in oklab, var(--color-stamp, #9b2318) 14%, transparent); } .ds-btn-stamp:focus-visible { outline: 2px solid var(--color-focus, #d8ab50); outline-offset: 2px; }"
+    },
+    {
+      "name": "Filed Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "One card in the drawer: typed call number, the author's hand, a rod hole at the foot.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-head\"><p class=\"ds-record\">DY·2026.09.18·7K</p><span class=\"ds-stamp\">Amended</span></div><h3 class=\"ds-card-title\">The long way home</h3><p class=\"ds-card-excerpt\">Walked back along the canal instead of taking the bus, and the whole day rearranged itself on the way.</p><p class=\"ds-record-sm\">Typed 23:14 · 2 min read</p></article>",
+      "css": ".ds-card { position: relative; background-color: var(--color-card, #dfd3b6); color: var(--color-ink, #191309); border-radius: 2px; padding: 1rem 1.25rem 2.5rem; box-shadow: 0 1px 2px rgb(0 0 0 / 0.28), 0 8px 18px -10px rgb(0 0 0 / 0.6); background-image: linear-gradient(180deg, rgb(255 255 255 / 0.28), transparent 6px, transparent calc(100% - 10px), rgb(0 0 0 / 0.05)); transition: translate 190ms cubic-bezier(0.16,0.84,0.28,1), box-shadow 190ms cubic-bezier(0.16,0.84,0.28,1); } .ds-card:hover { translate: 0 -7px; box-shadow: 0 2px 4px rgb(0 0 0 / 0.3), 0 18px 30px -14px rgb(0 0 0 / 0.68); } .ds-card::after { content: ''; position: absolute; bottom: 6px; left: 50%; width: 13px; height: 13px; translate: -50% 0; border-radius: 999px; background: radial-gradient(circle at 50% 35%, var(--color-deep, #17110a) 0 58%, color-mix(in oklab, var(--color-card-sunk, #cdbf9c) 70%, #000) 59% 100%); box-shadow: inset 0 1px 1px rgb(0 0 0 / 0.55); } .ds-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; } .ds-record { margin: 0; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.13em; color: var(--color-ink-soft, #5e5138); } .ds-record-sm { margin: 1.25rem 0 0; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--color-ink-soft, #5e5138); } .ds-card-title { margin: 0.625rem 0 0; font-family: 'Faustina Variable', Georgia, serif; font-size: 1.375rem; font-weight: 600; line-height: 1.2; } .ds-card-excerpt { margin: 0.5rem 0 0; max-width: 60ch; font-family: 'Faustina Variable', Georgia, serif; font-size: 0.9375rem; line-height: 1.75rem; color: var(--color-ink-soft, #5e5138); background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(1.75rem - 1px), color-mix(in oklab, var(--color-rule, #bfae84) 42%, transparent) calc(1.75rem - 1px), color-mix(in oklab, var(--color-rule, #bfae84) 42%, transparent) 1.75rem); } .ds-stamp { display: inline-flex; padding: 0.15rem 0.4rem; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.5625rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-stamp, #9b2318); border: 1.5px solid var(--color-stamp, #9b2318); border-radius: 1px; rotate: -3deg; opacity: 0.88; }"
+    },
+    {
+      "name": "Blank Card (today's primary action)",
+      "kind": "custom",
+      "refersTo": "blank-card",
+      "description": "The primary action is not a button: it is the card you are about to type, brass-flooded, ruled and punched like every other.",
+      "html": "<button class=\"ds-blank-card\"><span class=\"ds-blank-month\">September 2026</span><span class=\"ds-blank-cta\"><svg width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z\"/></svg>Type today’s card</span></button>",
+      "css": ".ds-blank-card { position: relative; display: flex; flex-direction: column; justify-content: space-between; min-height: 10rem; width: 17rem; padding: 0.95rem 1.15rem 2.5rem; text-align: left; border: 0; border-radius: 2px; color: #1a1204; cursor: pointer; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.13em; background-image: repeating-linear-gradient(to bottom, transparent 0, transparent calc(1.75rem - 1px), rgb(26 18 4 / 0.16) calc(1.75rem - 1px), rgb(26 18 4 / 0.16) 1.75rem), linear-gradient(180deg, color-mix(in oklab, var(--color-brass-bright, #d8ab50) 94%, white) 0%, var(--color-brass, #b08a3e) 44%, color-mix(in oklab, var(--color-brass, #b08a3e) 76%, black) 100%); background-position: 0 1.5rem, 0 0; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), inset 0 -1px 0 rgb(0 0 0 / 0.3), 0 1px 2px rgb(0 0 0 / 0.28), 0 8px 18px -10px rgb(0 0 0 / 0.6); transition: translate 190ms cubic-bezier(0.16,0.84,0.28,1), box-shadow 190ms cubic-bezier(0.16,0.84,0.28,1), filter 140ms ease-out; } .ds-blank-card:hover { translate: 0 -7px; filter: brightness(1.06); } .ds-blank-card:active { translate: 0 1px; box-shadow: inset 0 2px 5px rgb(0 0 0 / 0.35), 0 1px 1px rgb(0 0 0 / 0.3); } .ds-blank-card::after { content: ''; position: absolute; bottom: 6px; left: 50%; width: 13px; height: 13px; translate: -50% 0; border-radius: 999px; background: radial-gradient(circle at 50% 35%, var(--color-deep, #17110a) 0 58%, rgb(26 18 4 / 0.55) 59% 100%); box-shadow: inset 0 1px 1px rgb(0 0 0 / 0.55); } .ds-blank-month { opacity: 0.7; } .ds-blank-cta { display: flex; align-items: center; gap: 0.625rem; font-size: 0.75rem; }"
+    },
+    {
+      "name": "Typed Field",
+      "kind": "input",
+      "refersTo": "field",
+      "description": "A typing slot on card stock: no box, one ink line along the bottom that thickens on focus.",
+      "html": "<div class=\"ds-field-wrap\"><label class=\"ds-field-label\" for=\"ds-f1\">Subject / keyword</label><input id=\"ds-f1\" class=\"ds-field\" placeholder=\"a word you remember writing\"></div>",
+      "css": ".ds-field-wrap { display: block; } .ds-field-label { display: block; margin-bottom: 0.375rem; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.13em; color: var(--color-ink-soft, #5e5138); } .ds-field { width: 100%; background-color: color-mix(in oklab, var(--color-card-sunk, #cdbf9c) 80%, transparent); color: var(--color-ink, #191309); font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.875rem; letter-spacing: 0.02em; padding: 0.7rem 0.85rem; border: 0; border-bottom: 1px solid var(--color-ink-soft, #5e5138); border-radius: 1px 1px 0 0; caret-color: var(--color-stamp, #9b2318); transition: border-color 140ms ease-out, background-color 140ms ease-out; } .ds-field::placeholder { color: color-mix(in oklab, var(--color-ink-soft, #5e5138) 80%, transparent); } .ds-field:hover { background-color: var(--color-card-sunk, #cdbf9c); } .ds-field:focus { outline: none; border-bottom-color: var(--color-ink, #191309); border-bottom-width: 2px; padding-bottom: calc(0.7rem - 1px); } .ds-field[aria-invalid='true'] { border-bottom-color: var(--color-stamp, #9b2318); border-bottom-width: 2px; padding-bottom: calc(0.7rem - 1px); }"
+    },
+    {
+      "name": "Guide Tab",
+      "kind": "chip",
+      "refersTo": "tab",
+      "description": "A trapezoidal manila tab standing proud of the cards behind it; its horizontal slot is derived from the date.",
+      "html": "<h2 class=\"ds-tab\"><span class=\"ds-tab-sm\">Friday</span><span class=\"ds-tab-day\">18</span><span class=\"ds-tab-sm\">September 2026</span><span class=\"ds-tab-today\">Today</span><span class=\"ds-tab-sm\">×2</span></h2>",
+      "css": ".ds-tab { display: inline-flex; align-items: center; gap: 0.5rem; margin: 0; padding: 0.3rem 0.85rem 0.35rem; background-color: var(--color-card-sunk, #cdbf9c); color: var(--color-ink, #191309); border-radius: 3px 3px 0 0; box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.32), 0 -1px 3px rgb(0 0 0 / 0.25); clip-path: polygon(0 100%, 4px 0, calc(100% - 4px) 0, 100% 100%); } .ds-tab-sm { font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.625rem; text-transform: uppercase; letter-spacing: 0.16em; color: var(--color-ink-soft, #5e5138); } .ds-tab-day { font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.9375rem; font-weight: 700; line-height: 1; letter-spacing: 0.06em; } .ds-tab-today { font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--color-stamp, #9b2318); }"
+    },
+    {
+      "name": "Brass Label Holder",
+      "kind": "nav",
+      "refersTo": "brass-plate",
+      "description": "The cabinet's identity: a screwed-on brass label holder carrying the name card, used in the top rail and on each drawer front.",
+      "html": "<a class=\"ds-plate\" href=\"#\"><span class=\"ds-plate-screw\" aria-hidden=\"true\"></span><span class=\"ds-plate-name\">My Diary</span></a>",
+      "css": ".ds-plate { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 0.75rem 0.375rem 0.625rem; text-decoration: none; border-radius: 2px; color: #1a1204; background-image: linear-gradient(180deg, color-mix(in oklab, var(--color-brass-bright, #d8ab50) 92%, white) 0%, var(--color-brass, #b08a3e) 38%, color-mix(in oklab, var(--color-brass, #b08a3e) 76%, black) 100%); box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.5), inset 0 -1px 0 rgb(0 0 0 / 0.3), 0 1px 2px rgb(0 0 0 / 0.35); transition: filter 140ms ease-out; } .ds-plate:hover { filter: brightness(1.1); } .ds-plate-screw { display: block; width: 3px; height: 1rem; border-radius: 999px; background: rgb(26 18 4 / 0.3); } .ds-plate-name { font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.13em; }"
+    },
+    {
+      "name": "Drawer",
+      "kind": "custom",
+      "refersTo": "drawer",
+      "description": "The recess cut into the case, rail-lined down each side. Every stack of cards, empty state and loading state sits inside one.",
+      "html": "<div class=\"ds-drawer\"><p class=\"ds-drawer-line\">Whole cabinet · 137 cards filed</p></div>",
+      "css": ".ds-drawer { background-color: var(--color-deep, #17110a); color: var(--color-deep-ink, #e4dac2); border-radius: 3px; padding: 1.5rem; box-shadow: inset 0 2px 10px rgb(0 0 0 / 0.55), inset 0 -1px 0 rgb(255 255 255 / 0.05); background-image: linear-gradient(90deg, color-mix(in oklab, var(--color-brass, #b08a3e) 55%, transparent) 0 1px, transparent 1px); } .ds-drawer-line { margin: 0; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.13em; font-variant-numeric: tabular-nums; color: var(--color-deep-ink-soft, #cfae6a); }"
+    },
+    {
+      "name": "Receipt Toast",
+      "kind": "custom",
+      "refersTo": "card",
+      "description": "A slip stamped and dropped on the desk after a transaction: a record code in the typewriter, the message in the author's serif.",
+      "html": "<div class=\"ds-toast\"><span class=\"ds-toast-code\">REC</span><p class=\"ds-toast-msg\">Card withdrawn.</p></div>",
+      "css": ".ds-toast { display: flex; align-items: flex-start; gap: 0.75rem; max-width: 24rem; padding: 0.75rem 0.5rem 0.75rem 1rem; background-color: var(--color-card, #dfd3b6); color: var(--color-ink, #191309); border-radius: 2px; box-shadow: 0 1px 2px rgb(0 0 0 / 0.28), 0 8px 18px -10px rgb(0 0 0 / 0.6); animation: ds-stamp-in 220ms cubic-bezier(0.16,0.84,0.28,1) both; } @keyframes ds-stamp-in { 0% { opacity: 0; scale: 1.08; rotate: -1.5deg; } 100% { opacity: 1; scale: 1; rotate: 0deg; } } .ds-toast-code { margin-top: 0.2rem; font-family: 'Courier Prime', ui-monospace, monospace; font-size: 0.625rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.16em; color: var(--color-ink-soft, #5e5138); } .ds-toast-msg { margin: 0; font-family: 'Faustina Variable', Georgia, serif; font-size: 0.9375rem; line-height: 1.4; } @media (prefers-reduced-motion: reduce) { .ds-toast { animation: none; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Card Catalog",
+    "overview": "The interface is a library card cabinet, not a feed. A varnished-oak case holds recessed drawers; inside each drawer, buff manila cards sit ruled and punched for a filing rod, with brass rails, guide tabs, label holders and pulls as the only hardware. The catalog types in typewriter carbon; the author writes in a book serif; a red rubber stamp marks anything that departs from the ordinary. Everything is made of the case, the recess, card stock, brass and ink — there is no sixth material, and nothing in the build is a neutral grey box.\n\nDensity is high but orderly: labels are small, uppercase and widely letterspaced; the content they label is large and comfortable. The single strongest tension in the system is the split between the two typographic voices — the cabinet's own speech and the author's hand — and the build enforces that split everywhere, including on the dashboard's largest heading, which stays in the typewriter because the catalog, not the author, is speaking there.\n\nTwo themes ship: night is the default, chosen for the product's real scene (a dim bedroom at the end of the day), and day is a reading room under daylight. They are not a ground swap: the case changes from dark walnut to daylit timber and the recess from near-black to mid walnut, while card stock, ink, brass and stamp red hold their values so the cards look like the same paper under a different lamp. The theme is written to data-theme on <html> before first paint by an inline script, so the drawer never flashes.",
+    "keyCharacteristics": [
+      "Two enforced typographic voices: Courier Prime for the catalog, Faustina for the author.",
+      "Near-square corners (2px) on every surface; no rounded-card language anywhere.",
+      "Five materials only: oak case, dark recess, manila card stock, brass, stamp red.",
+      "Physical depth — recessed drawers, cast shadows, bevelled brass — instead of flat tonal panels.",
+      "One authored motion (a card settling onto the filing rod) plus one receipt (a stamp press).",
+      "Browser chrome is themed as part of the cabinet: selection, caret, scrollbar, focus ring, date picker."
+    ],
+    "rules": [
+      { "name": "The Brass Is Metal Rule", "body": "Brass is a surface material, never a text colour. Type on card stock is ink / ink-soft; type on a recessed surface (drawer, top rail) is deep-ink / deep-ink-soft; type on the bare case is case-ink / case-ink-soft. Text set directly on a brass face is near-black (#1a1204), not brass.", "section": "colors" },
+      { "name": "The Stamp Rule", "body": "Red is an annotation, never a fill. It appears as an outline, a hairline, a caret or a word — and never as the background of anything larger than a marker cell.", "section": "colors" },
+      { "name": "The Constant Stock Rule", "body": "Switching themes changes the case, the recess, the ruling and the shadows. Card stock, carbon ink, brass and stamp red stay put, because paper and hardware do not change colour when the lamp does.", "section": "colors" },
+      { "name": "The Two Voices Rule", "body": "Faustina is reserved for what the author wrote — entry titles, entry bodies, card excerpts, the compose fields' content, and toast messages quoting the cabinet's reply to the author. Everything else the interface says is Courier Prime, including long sentences, which take .record-prose rather than switching to the serif. A serif heading generated by the app, or a monospaced label over the author's own words, is a defect.", "section": "typography" },
+      { "name": "The Ruled Line Rule", "body": "Long-form author text sets its line-height to var(--rule-step) (1.75rem) so it sits on the card's ruling. Change the ruling pitch and the prose leading follows; never set one without the other.", "section": "typography" },
+      { "name": "The Tabular Rule", "body": "Numerals are tabular across the whole document; .hand explicitly returns to normal numerals, because the author's writing is not a ledger. Counts are zero-padded to catalog width (007, not 7).", "section": "typography" },
+      { "name": "The Drawer Containment Rule", "body": "Cards never sit directly on the oak. A list of cards, an empty state and a loading state all live inside a .drawer — recessed, rail-lined, padded 1rem (1.5rem at sm) — so the stack always has a container behind it.", "section": "layout" },
+      { "name": "The Real Travel Rule", "body": "Lift is movement plus shadow, never shadow alone: .liftable and .blank-card translate -7px on hover while the cast shadow lengthens and, on a punched card, the rod hole darkens beneath it. Pressing reverses it — +1px and an inset shadow, as if the card were pushed down onto the rod.", "section": "elevation" },
+      { "name": "The No Flat Panel Rule", "body": "A surface is either case, recess, card stock or brass, and each carries its own depth cue (grain, inset shadow, cast shadow, bevel). A borderless flat rectangle of arbitrary colour has no place in the cabinet.", "section": "elevation" },
+      { "name": "The Square Corner Rule", "body": "2px is the radius. There is no md/lg/xl radius scale and nothing in the system is pill-shaped except a drawer pull and the rod hole.", "section": "shapes" },
+      { "name": "The Material Edge Rule", "body": "Card stock is bounded by its own fiber gradient and cast shadow, not by a 1px border. Reach for a border only for a dashed internal rule or a brass hairline on the case.", "section": "shapes" },
+      { "name": "The Corner Stamp Rule", "body": "A stamp mark belongs in a card's corner, opposite its call number. It is never a pill in a header row and never a coloured chip.", "section": "components" },
+      { "name": "The Deterministic Tab Rule", "body": "A guide tab's slot is derived from its date, so a given day always stands in the same place across sessions and pages. Tab position is never random and never sequential.", "section": "components" }
+    ],
+    "dos": [
+      "Do set every new surface in one of the five materials — case, recess, card stock, brass, stamp red — and give it that material's depth cue.",
+      "Do use .record / .record-sm / .record-prose for everything the interface says, and .hand only for text the author wrote.",
+      "Do lock long-form author prose to line-height: var(--rule-step) so it sits on the card's ruling, and cap the measure (68ch on the entry, max-w-prose on excerpts).",
+      "Do keep corners at 2px, and reach for 1px only on marks smaller than a button.",
+      "Do put actions on the correct ground: btn-brass for the primary act, btn-card on card stock, btn-case on the rail or inside a drawer, btn-quiet for dismissal, btn-stamp for withdrawal.",
+      "Do pad the bottom of any .card-punch surface to at least 2.5rem so the rod hole stays clear.",
+      "Do carry state changes on real travel plus shadow (.liftable), and let --ease-rail (cubic-bezier(0.16, 0.84, 0.28, 1)) carry anything that slides.",
+      "Do theme the browser's own surfaces — selection, caret, scrollbar, focus ring, underline offset, tabular numerals, the native date-picker indicator — as part of the cabinet.",
+      "Do disable the authored motion under prefers-reduced-motion, keeping only the shadow change on hover.",
+      "Do zero-pad counts to catalog width (typedCount) and show dates as the catalog would file them."
+    ],
+    "donts": [
+      "Don't set text in brass, or set a brass surface's label in anything but near-black (#1a1204).",
+      "Don't flood a surface in stamp red or use it for focus; it is an annotation for amendment, withdrawal, rejection and exception only.",
+      "Don't put a small uppercase label above a heading. The system has no kickers or eyebrows; a heading stands alone and a record label sits beside or beneath its content.",
+      "Don't introduce a rounded-card radius, a pill button or a radius scale beyond 1px/2px/3px.",
+      "Don't fade anything in. The one authored entrance (.file-in, 300ms) starts fully visible and is carried by clip-path, translation and a travelling shadow; opacity is used only for the stamp press receipt.",
+      "Don't add a second entrance animation, a spinner, or a decorative transition; the system has exactly one authored moment and one receipt.",
+      "Don't draw a 1px border around a card, or use a flat grey panel as a container.",
+      "Don't let cards sit directly on the oak — wrap any stack, empty state or loading state in a .drawer.",
+      "Don't use glyph or emoji icons; icons are Lucide SVG at size-4 (1rem) with 1.75 stroke, 2 for directional chevrons, and they never replace a text label on a primary control.",
+      "Don't treat the day theme as a light-mode inversion: card stock, ink, brass and stamp red hold their values, and only the case, recess, ruling and shadows change."
+    ]
+  }
+}

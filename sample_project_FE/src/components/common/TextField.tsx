@@ -9,9 +9,6 @@ interface TextFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   trailing?: ReactNode
 }
 
-export const inputClasses =
-  'w-full rounded-lg border bg-surface px-3.5 py-2.5 text-sm text-ink placeholder:text-muted/70 transition-colors duration-150 disabled:cursor-not-allowed disabled:bg-paper'
-
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function TextField(
   { label, error, hint, trailing, className, id, ...props },
   ref,
@@ -22,35 +19,30 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
   const hintId = `${inputId}-hint`
 
   return (
-    <div className="space-y-1.5">
-      <label htmlFor={inputId} className="block text-sm font-medium text-ink">
+    <div>
+      <label htmlFor={inputId} className="record block text-ink-soft">
         {label}
       </label>
 
-      <div className="relative">
+      <div className="relative mt-1.5">
         <input
           ref={ref}
           id={inputId}
           aria-invalid={error ? true : undefined}
           aria-describedby={cn(error ? errorId : undefined, hint ? hintId : undefined) || undefined}
-          className={cn(
-            inputClasses,
-            error ? 'border-danger focus:border-danger' : 'border-line focus:border-accent',
-            trailing ? 'pr-11' : undefined,
-            className,
-          )}
+          className={cn('field', trailing ? 'pr-12' : undefined, className)}
           {...props}
         />
         {trailing && <div className="absolute inset-y-0 right-1 flex items-center">{trailing}</div>}
       </div>
 
       {hint && !error && (
-        <p id={hintId} className="text-xs text-muted">
+        <p id={hintId} className="record-sm mt-1.5 text-ink-soft">
           {hint}
         </p>
       )}
       {error && (
-        <p id={errorId} role="alert" className="text-xs text-danger">
+        <p id={errorId} role="alert" className="record-sm mt-1.5 font-bold text-stamp">
           {error}
         </p>
       )}

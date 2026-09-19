@@ -11,35 +11,42 @@ export function CreateDiary() {
   const createDiary = useCreateDiary()
 
   return (
-    <div className="space-y-8">
+    <div>
       <Link
         to="/dashboard"
-        className="inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-ink"
+        className="record inline-flex items-center gap-2 text-case-ink-soft transition-colors hover:text-case-ink"
       >
-        <ArrowLeft className="size-4" aria-hidden="true" />
-        Back to diary
+        <ArrowLeft className="size-3.5" strokeWidth={2} aria-hidden="true" />
+        Back to the drawer
       </Link>
 
-      <div>
-        <h1 className="font-serif text-2xl text-ink sm:text-3xl">New entry</h1>
-        <p className="mt-1 text-sm text-muted">What would you like to remember about today?</p>
+      <div className="mt-6">
+        <h1 className="record text-[1.5rem] leading-tight font-bold tracking-[0.06em] text-case-ink sm:text-[1.875rem]">
+          Type a new card
+        </h1>
+        <p className="record-prose mt-3 max-w-[52ch] text-[0.9375rem] text-balance text-case-ink-soft">
+          It is filed under the date it is about, not the moment you wrote it.
+        </p>
       </div>
 
-      <DiaryForm
-        submitLabel="Save Entry"
-        loadingText="Saving…"
-        isSubmitting={createDiary.isPending}
-        onCancel={() => navigate('/dashboard')}
-        onSubmit={(values) =>
-          createDiary.mutate(values, {
-            onSuccess: (entry) => {
-              showToast('Entry saved.')
-              navigate(`/diary/${entry.id}`, { replace: true })
-            },
-            onError: (error) => showToast(getErrorMessage(error, 'Unable to save this entry.'), 'error'),
-          })
-        }
-      />
+      <div className="mt-8">
+        <DiaryForm
+          draftKey="new"
+          submitLabel="File this card"
+          loadingText="Filing"
+          isSubmitting={createDiary.isPending}
+          onCancel={() => navigate('/dashboard')}
+          onSubmit={(values) =>
+            createDiary.mutate(values, {
+              onSuccess: (entry) => {
+                showToast('Card filed.')
+                navigate(`/diary/${entry.id}`, { replace: true })
+              },
+              onError: (error) => showToast(getErrorMessage(error, 'The card could not be filed.'), 'error'),
+            })
+          }
+        />
+      </div>
     </div>
   )
 }

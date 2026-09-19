@@ -24,9 +24,13 @@ export const PasswordField = forwardRef<HTMLInputElement, PasswordFieldProps>(fu
           onClick={() => setVisible((current) => !current)}
           aria-label={visible ? 'Hide password' : 'Show password'}
           aria-pressed={visible}
-          className="mr-1 rounded-md p-2 text-muted transition-colors hover:bg-accent-soft hover:text-ink"
+          className="mr-1 rounded-[1px] p-2 text-ink-soft transition-colors hover:bg-[color-mix(in_oklab,var(--color-rule)_45%,transparent)] hover:text-ink"
         >
-          {visible ? <EyeOff className="size-4" aria-hidden="true" /> : <Eye className="size-4" aria-hidden="true" />}
+          {visible ? (
+            <EyeOff className="size-4" strokeWidth={1.75} aria-hidden="true" />
+          ) : (
+            <Eye className="size-4" strokeWidth={1.75} aria-hidden="true" />
+          )}
         </button>
       }
       {...props}

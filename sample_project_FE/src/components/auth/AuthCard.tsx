@@ -1,4 +1,3 @@
-import { BookOpen } from 'lucide-react'
 import type { ReactNode } from 'react'
 
 interface AuthCardProps {
@@ -8,25 +7,32 @@ interface AuthCardProps {
   footer: ReactNode
 }
 
-/** Centred card shared by the login and registration screens. */
+/** The cabinet, closed. One drawer front, one brass plate, one card. */
 export function AuthCard({ title, subtitle, children, footer }: AuthCardProps) {
   return (
-    <div className="flex min-h-dvh flex-col items-center justify-center px-4 py-10 sm:px-6">
-      <div className="animate-rise w-full max-w-sm">
-        <div className="mb-8 flex flex-col items-center text-center">
-          <span className="mb-4 flex size-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
-            <BookOpen className="size-5" aria-hidden="true" />
+    <div className="flex min-h-dvh flex-col items-center justify-center px-4 py-12 sm:px-6">
+      <div className="file-in w-full max-w-md">
+        {/* The drawer front */}
+        <div className="drawer rail flex flex-col items-center px-6 py-7">
+          <span className="brass-plate flex items-center gap-2.5 px-4 py-2">
+            <span className="block h-4 w-[3px] rounded-full bg-[rgb(26_18_4/0.3)]" aria-hidden="true" />
+            <span className="record text-sm leading-none font-bold">My Diary</span>
+            <span className="block h-4 w-[3px] rounded-full bg-[rgb(26_18_4/0.3)]" aria-hidden="true" />
           </span>
-          <h1 className="font-serif text-2xl text-ink">My Diary</h1>
-          <p className="mt-1 text-sm text-muted">{subtitle}</p>
+          <p className="record-sm mt-3.5 text-center text-deep-ink-soft">{subtitle}</p>
+          {/* The drawer pull */}
+          <span
+            aria-hidden="true"
+            className="brass-plate mt-5 h-2.5 w-24 rounded-full"
+          />
         </div>
 
-        <div className="rounded-card border border-line bg-surface p-6 shadow-sm shadow-ink/5 sm:p-7">
-          <h2 className="sr-only">{title}</h2>
+        <div className="card card-fiber -mt-3 px-6 py-7 sm:px-7">
+          <h1 className="record-prose mb-6 text-[1.5rem] leading-tight font-bold text-ink">{title}</h1>
           {children}
         </div>
 
-        <div className="mt-6 text-center text-sm text-muted">{footer}</div>
+        <div className="record-prose mt-6 text-center text-[0.8125rem] text-case-ink-soft">{footer}</div>
       </div>
     </div>
   )

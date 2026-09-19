@@ -1,9 +1,13 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
-import { Loader2 } from 'lucide-react'
 import { cn } from '../../utils/cn'
 
-type Variant = 'primary' | 'secondary' | 'ghost' | 'danger'
-type Size = 'sm' | 'md'
+/**
+ * `brass` is the cabinet's own hardware and carries the primary action.
+ * `card` sits on card stock, `case` sits on the bare oak, `quiet` recedes,
+ * `stamp` is the red ribbon reserved for destruction.
+ */
+type Variant = 'brass' | 'card' | 'case' | 'quiet' | 'stamp'
+type Size = 'sm' | 'md' | 'lg'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant
@@ -14,19 +18,36 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const VARIANTS: Record<Variant, string> = {
-  primary: 'bg-accent text-white hover:bg-accent/90 disabled:bg-accent/50',
-  secondary: 'bg-surface text-ink border border-line hover:bg-paper',
-  ghost: 'text-muted hover:text-ink hover:bg-accent-soft',
-  danger: 'bg-danger text-white hover:bg-danger/90 disabled:bg-danger/50',
+  brass: 'btn-brass',
+  card: 'btn-card',
+  case: 'btn-case',
+  quiet: 'btn-quiet',
+  stamp: 'btn-stamp',
 }
 
 const SIZES: Record<Size, string> = {
-  sm: 'h-9 px-3 text-sm gap-1.5',
-  md: 'h-11 px-5 text-sm gap-2',
+  sm: 'min-h-9 px-3 text-[0.625rem]',
+  md: 'min-h-11 px-[1.15rem]',
+  lg: 'min-h-13 px-6 text-xs',
+}
+
+/** Three dots typed one after another — the machine working. */
+function Working() {
+  return (
+    <span className="inline-flex gap-[3px]" aria-hidden="true">
+      {[0, 1, 2].map((index) => (
+        <span
+          key={index}
+          className="size-[3px] rounded-full bg-current opacity-40 motion-safe:animate-pulse"
+          style={{ animationDelay: `${index * 160}ms`, animationDuration: '900ms' }}
+        />
+      ))}
+    </span>
+  )
 }
 
 export function Button({
-  variant = 'primary',
+  variant = 'brass',
   size = 'md',
   isLoading = false,
   loadingText,
@@ -41,16 +62,10 @@ export function Button({
       type={type}
       disabled={disabled || isLoading}
       aria-busy={isLoading || undefined}
-      className={cn(
-        'inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-150',
-        'disabled:cursor-not-allowed disabled:opacity-70',
-        VARIANTS[variant],
-        SIZES[size],
-        className,
-      )}
+      className={cn('btn', VARIANTS[variant], SIZES[size], className)}
       {...props}
     >
-      {isLoading && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
+      {isLoading && <Working />}
       {isLoading && loadingText ? loadingText : children}
     </button>
   )

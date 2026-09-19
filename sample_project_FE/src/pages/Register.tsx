@@ -17,18 +17,18 @@ const registerSchema = z
     username: z
       .string()
       .trim()
-      .min(3, 'Username must be between 3 and 50 characters.')
-      .max(50, 'Username must be between 3 and 50 characters.'),
-    email: z.string().trim().min(1, 'Please enter your email.').email('Please enter a valid email address.'),
+      .min(3, 'A username is between 3 and 50 characters.')
+      .max(50, 'A username is between 3 and 50 characters.'),
+    email: z.string().trim().min(1, 'The cabinet needs an email address.').email('That address does not look right.'),
     password: z
       .string()
-      .min(8, 'Password must be at least 8 characters.')
-      .max(72, 'Password must not exceed 72 characters.'),
-    confirmPassword: z.string().min(1, 'Please confirm your password.'),
+      .min(8, 'A key is at least 8 characters.')
+      .max(72, 'A key is at most 72 characters.'),
+    confirmPassword: z.string().min(1, 'Type the key once more.'),
   })
   .refine((values) => values.password === values.confirmPassword, {
     path: ['confirmPassword'],
-    message: 'Passwords do not match.',
+    message: 'The two keys do not match.',
   })
 
 type RegisterValues = z.infer<typeof registerSchema>
@@ -56,33 +56,33 @@ export function Register() {
       // Registration returns the new user, not a token, so sign in straight after.
       try {
         await login({ username: values.username, password: values.password })
-        showToast('Your diary is ready.')
+        showToast('Your cabinet is ready.')
         navigate('/dashboard', { replace: true })
       } catch {
-        showToast('Account created. Please sign in.')
+        showToast('Cabinet opened. Sign in to start filing.')
         navigate('/login', { replace: true })
       }
     } catch (error) {
-      setFormError(getErrorMessage(error, 'Unable to create your account. Please try again.'))
+      setFormError(getErrorMessage(error, 'The cabinet could not be opened. Please try again.'))
     }
   }
 
   return (
     <AuthCard
-      title="Create account"
-      subtitle="Start your diary"
+      title="Open a cabinet"
+      subtitle="Card Catalog &middot; nobody reads it but you"
       footer={
         <>
-          Already have an account?{' '}
-          <Link to="/login" className="font-medium text-accent underline-offset-4 hover:underline">
-            Sign in
+          Already have one?{' '}
+          <Link to="/login" className="font-bold text-case-ink underline decoration-brass underline-offset-4">
+            Unlock it
           </Link>
         </>
       }
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
         {formError && (
-          <p role="alert" className="rounded-lg bg-danger-soft px-3 py-2.5 text-sm text-danger">
+          <p role="alert" className="record border border-dashed border-stamp/70 px-3 py-2.5 font-bold text-stamp">
             {formError}
           </p>
         )}
@@ -104,7 +104,7 @@ export function Register() {
         />
 
         <PasswordField
-          label="Password"
+          label="Key"
           autoComplete="new-password"
           hint="At least 8 characters."
           error={errors.password?.message}
@@ -112,14 +112,14 @@ export function Register() {
         />
 
         <PasswordField
-          label="Confirm password"
+          label="Key again"
           autoComplete="new-password"
           error={errors.confirmPassword?.message}
           {...register('confirmPassword')}
         />
 
-        <Button type="submit" className="w-full" isLoading={isSubmitting} loadingText="Creating account…">
-          Register
+        <Button type="submit" className="w-full" isLoading={isSubmitting} loadingText="Opening">
+          Open the cabinet
         </Button>
       </form>
     </AuthCard>
